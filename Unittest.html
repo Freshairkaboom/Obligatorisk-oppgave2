@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width" />
+    <title>Test stolpediagram</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.9.2.css" />
+</head>
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
+    <script src="controller.js"></script>
+    <script>
+        let chosenBar;
+        var inputValue = "5";
+        var numbers = [1, 2, 3, 4, 5];
+        function show() { }
+
+        QUnit.test("Select bar", function (assert) {
+            const actual = selectBar("5");
+            const expected = "5";
+            assert.equal(actual, expected);
+        });
+
+        QUnit.test("Deselect bar", function (assert) {
+            let chosenBar;
+            const actual = selectBar("Ingen");
+            const expected = "Ingen";
+            assert.equal(actual, expected);
+        });
+
+        QUnit.test("Remove bar", function (assert) {
+            chosenBar = "5";
+            removeBar("5")
+            const actual = numbers;
+            const expected = [1, 2, 3, 4];
+            assert.deepEqual(actual, expected);
+        });
+
+        QUnit.test("Edit bar", function (assert) {
+            inputValue = "3";
+            chosenBar = "3";
+            const actual = editBar("3");
+            const expected = "edited 3";
+            assert.equal(actual, expected);
+        });
+
+        QUnit.test("Add bar", function (assert) {
+            inputValue = "6";
+            const actual = addBar(inputValue);
+            const expected = "Added bar with value 6";
+            assert.deepEqual(actual, expected);
+        });
+    </script>
+</body>
+
+</html>
